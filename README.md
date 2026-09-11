@@ -5,7 +5,7 @@ https://raw.githubusercontent.com/DeezLikerStudio/aws-game-lists-lst/main/result
 
 CIDR:
 ```
-https://github.com/DeezLikerStudio/aws-game-lists-lst/blob/main/results/cidr_ipv4.txt
+https://github.com/DeezLikerStudio/aws-game-lists-lst/blob/main/results/cidr_ipv4.lst
 ```
 
 CIDR EU:
