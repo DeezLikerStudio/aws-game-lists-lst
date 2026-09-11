@@ -16,6 +16,8 @@ jobs:
 
       - name: parse_orig
         run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git remote add upstream https://github.com/akorshun/aws-game-lists.git
           git fetch upstream
           git merge upstream/main --no-edit --allow-unrelated-histories -X ours
