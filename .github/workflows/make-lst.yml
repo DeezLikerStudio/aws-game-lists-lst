@@ -1,0 +1,35 @@
+name: change_ext
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: parse_orig
+        run: |
+          git remote add upstream https://github.com/akorshun/aws-game-lists.git
+          git fetch upstream
+          git merge upstream/main --no-edit --allow-unrelated-histories -X ours
+
+      - name: make_lst
+        run: |
+          cp results/domains.txt results/domains.lst
+          cp results/cidr_ipv4.txt results/cidr_ipv4.lst
+          cp results/cidr_ipv4_eu.txt results/cidr_ipv4_eu.lst
+
+      - name: upload
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "auto: sync + lst копии"
+          git push
